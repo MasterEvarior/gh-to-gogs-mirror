@@ -1,0 +1,27 @@
+[formatter.mdformat]
+command = "mdformat"
+options = []
+excludes = []
+includes = ["*.md"]
+
+[formatter.black]
+command = "black"
+options = []
+excludes = []
+includes = ["*.py","*.pyi"]
+
+[formatter.deadnix]
+command = "deadnix"
+options = ["--edit"]
+excludes = []
+includes = ["*.nix"]
+
+[formatter.nixfmt-rfc-style]
+command = "nixfmt"
+options = []
+excludes = []
+includes = ["*.nix"]
+
+[global]
+excludes = ["*.png","*.jpg","*.jpeg", "flake.lock", ".gitignore", ".envrc"]
+
