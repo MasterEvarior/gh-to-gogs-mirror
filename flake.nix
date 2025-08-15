@@ -32,7 +32,11 @@
         '';
 
         # Environment Variables
-        GOGS_URL = "https://git.internal.giannin.cloud/api/v1";
+        GH_TOKEN = "xxx";
+        GH_USER = "xxx";
+        GOGS_TOKEN = "xxx";
+        GOGS_URL = "https://git.xxx/api/v1";
+        GOGS_USER_ID = "xxx";
       };
     };
 }

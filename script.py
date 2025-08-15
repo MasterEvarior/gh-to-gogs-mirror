@@ -38,11 +38,17 @@ def get_bool(name: str, default: bool) -> bool:
         return default
 
 
-def get_github_repos(g: Github, owner: str) -> List[Repository]:
+def get_github_repos(gh_access_token: str, owner: str) -> List[Repository]:
+    auth = Auth.Token(gh_access_token)
+    g = Github(auth=auth)
+
     matching_repos = []
-    for repo in g.get_user().get_repos():
+    for repo in g.get_user().get_repos(visibility="all"):
         if repo.owner.login == owner:
             matching_repos.append(repo)
+
+    g.close()
+
     return matching_repos
 
 
@@ -52,11 +58,36 @@ def get_gogs_repos(gogs_token: str, gogs_url: str) -> List[str]:
     response = requests.get(gogs_url + "/user/repos", headers=headers)
     response.raise_for_status()
 
-    print("Test")
-    print(response)
-    print(response.json())
-
+    repo_names = [repo["name"] for repo in response.json()]
     return repo_names
+
+
+def create_gogs_repo(
+    gogs_token: str,
+    gogs_url: str,
+    gogs_user_id: int,
+    gh_user: str,
+    gh_access_token: str,
+    repo: Repository,
+):
+    headers = {
+        "Authorization": "token " + gogs_token,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+
+    payload = {
+        "clone_addr": repo.clone_url,
+        "repo_name": repo.name,
+        "uid": gogs_user_id,
+        "mirror": True,
+        "private": True,
+        "description": repo.description,
+        "auth_username": gh_user,
+        "auth_password": gh_access_token,
+    }
+    response = requests.post(gogs_url + "/repos/migrate", headers=headers, json=payload)
+    response.raise_for_status()
 
 
 def remove_forks(repositories: List[Repository]) -> List[Repository]:
@@ -72,24 +103,32 @@ def main():
     MIRROR_FORKS = get_bool("MIRROR_FORKS", False)
     GOGS_URL = get_env_var("GOGS_URL")
     GOGS_ACCESS_TOKEN = get_env_var("GOGS_TOKEN")
+    GOGS_USER_ID = int(get_env_var("GOGS_USER_ID"))
 
-    auth = Auth.Token(GH_ACCESS_TOKEN)
-    g = Github(auth=auth)
+    repositories = get_github_repos(GH_ACCESS_TOKEN, GH_USER)
 
-    repositories = get_github_repos(g, GH_USER)
+    print("Found {:d} repositories on GitHub".format(len(repositories)))
 
     if MIRROR_FORKS:
         repositories = remove_forks(all_repositories)
 
     gogs_repositories = get_gogs_repos(GOGS_ACCESS_TOKEN, GOGS_URL)
-    print(gogs_repositories)
 
-    # for repo in repositories:
-    #     # print(repo.full_name)
-    #     print(repo.clone_url)
-    #     print(repo.fork)
-
-    g.close()
+    for repo in repositories:
+        print("Checking {:s}...".format(repo.name))
+        if repo.name not in gogs_repositories and repo.get_stats_contributors() != None:
+            print("Create new mirror for {:s}".format(repo.name))
+            create_gogs_repo(
+                GOGS_ACCESS_TOKEN,
+                GOGS_URL,
+                GOGS_USER_ID,
+                GH_USER,
+                GH_ACCESS_TOKEN,
+                repo,
+            )
+            print("Successfully created new mirror for {:s}".format(repo.name))
+        else:
+            print("{:s} does already exist or is empty".format(repo.name))
 
 
 if __name__ == "__main__":
