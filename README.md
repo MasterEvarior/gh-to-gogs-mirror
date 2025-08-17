@@ -2,7 +2,7 @@
 
 ![quality workflow](https://github.com/MasterEvarior/gh-to-gogs-mirror/actions/workflows/quality.yaml/badge.svg) ![release workflow](https://github.com/MasterEvarior/gh-to-gogs-mirror/actions/workflows/publish.yaml/badge.svg)
 
-A small utility script, which setups mirror repository on my [Gogs](https://gogs.io/) instance for each of my [GitHub](https://github.com/) repositories.
+A small utility script, which setups mirror repositories on my [Gogs](https://gogs.io/) instance for each of my [GitHub](https://github.com/) repositories.
 
 ## Build
 
