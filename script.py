@@ -105,14 +105,18 @@ def main():
     GOGS_ACCESS_TOKEN = get_env_var("GOGS_TOKEN")
     GOGS_USER_ID = int(get_env_var("GOGS_USER_ID"))
 
+    print("Fetching GitHub repositories...")
     repositories = get_github_repos(GH_ACCESS_TOKEN, GH_USER)
-
     print("Found {:d} repositories on GitHub".format(len(repositories)))
 
-    if MIRROR_FORKS:
+    if MIRROR_FORKS == False:
+        print("Remove forks from repositories")
         repositories = remove_forks(all_repositories)
+        print("{:d} repositories left".format(len(repositories)))
 
+    print("Fetching Gogs repositories...")
     gogs_repositories = get_gogs_repos(GOGS_ACCESS_TOKEN, GOGS_URL)
+    print("Found {:d} repositories on Gogs".format(len(gogs_repositories)))
 
     for repo in repositories:
         print("Checking {:s}...".format(repo.name))
