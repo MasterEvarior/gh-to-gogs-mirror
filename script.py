@@ -118,21 +118,33 @@ def main():
     gogs_repositories = get_gogs_repos(GOGS_ACCESS_TOKEN, GOGS_URL)
     print("Found {:d} repositories on Gogs".format(len(gogs_repositories)))
 
+    progress = 0
     for repo in repositories:
-        print("Checking {:s}...".format(repo.name))
-        if repo.name not in gogs_repositories and repo.get_stats_contributors() != None:
-            print("Create new mirror for {:s}".format(repo.name))
-            create_gogs_repo(
-                GOGS_ACCESS_TOKEN,
-                GOGS_URL,
-                GOGS_USER_ID,
-                GH_USER,
-                GH_ACCESS_TOKEN,
-                repo,
-            )
-            print("Successfully created new mirror for {:s}".format(repo.name))
-        else:
-            print("{:s} does already exist or is empty".format(repo.name))
+        print(
+            "{:d}/{:d} Checking {:s}...".format(progress, len(repositories), repo.name)
+        )
+
+        if repo.name not in gogs_repositories:
+            print("     {:s} does already exist".format(repo.name))
+            progress = progress + 1
+            continue
+
+        if repo.get_stats_contributors() != None:
+            print("     {:s} is empty".format(repo.name))
+            progress = progress + 1
+            continue
+
+        print("Create new mirror for {:s}".format(repo.name))
+        create_gogs_repo(
+            GOGS_ACCESS_TOKEN,
+            GOGS_URL,
+            GOGS_USER_ID,
+            GH_USER,
+            GH_ACCESS_TOKEN,
+            repo,
+        )
+        print("Successfully created new mirror for {:s}".format(repo.name))
+        progress = progress + 1
 
 
 if __name__ == "__main__":
