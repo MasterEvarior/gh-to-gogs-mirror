@@ -111,7 +111,7 @@ def main():
 
     if MIRROR_FORKS == False:
         print("Remove forks from repositories")
-        repositories = remove_forks(all_repositories)
+        repositories = remove_forks(repositories)
         print("{:d} repositories left".format(len(repositories)))
 
     print("Fetching Gogs repositories...")
