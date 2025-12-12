@@ -43,6 +43,7 @@ docker run -d \
 | GOGS_URL     | URL to your Gogs instance                            |         | `https://git.my-url/api/v1` | ✅         |
 | GOGS_USER_ID | Id of our Gogs user                                  |         | 78                          | ✅         |
 | MIRROR_FORKS | Wether or not you want to mirror forks you have made | False   | False                       | ❌         |
+| MAKE_PRIVATE | Wether or not you want to make the mirrors private   | True    | True                        | ❌         |
 
 ## Development
 

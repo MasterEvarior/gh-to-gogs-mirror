@@ -68,6 +68,7 @@ def create_gogs_repo(
     gogs_user_id: int,
     gh_user: str,
     gh_access_token: str,
+    private: bool,
     repo: Repository,
 ):
     headers = {
@@ -81,7 +82,7 @@ def create_gogs_repo(
         "repo_name": repo.name,
         "uid": gogs_user_id,
         "mirror": True,
-        "private": True,
+        "private": private,
         "description": repo.description,
         "auth_username": gh_user,
         "auth_password": gh_access_token,
@@ -108,10 +109,11 @@ def bool_to_string(value: bool) -> str:
 def main():
     GH_USER = get_env_var("GH_USER")
     GH_ACCESS_TOKEN = get_env_var("GH_TOKEN")
-    MIRROR_FORKS = get_bool("MIRROR_FORKS", False)
     GOGS_URL = get_env_var("GOGS_URL")
     GOGS_ACCESS_TOKEN = get_env_var("GOGS_TOKEN")
     GOGS_USER_ID = int(get_env_var("GOGS_USER_ID"))
+    MIRROR_FORKS = get_bool("MIRROR_FORKS", False)
+    MAKE_PRIVATE = get_bool("MAKE_PRIVATE", True)
     VERSION = "1.1.0"  # x-release-please-version
 
     print("Version: {:s}".format(VERSION))
@@ -130,6 +132,7 @@ def main():
         )
     )
     print("    - Mirror Forks: {:s}".format(bool_to_string(MIRROR_FORKS)))
+    print("    - Make Private: {:s}".format(bool_to_string(MAKE_PRIVATE)))
 
     print("Fetching GitHub repositories...")
     repositories = get_github_repos(GH_ACCESS_TOKEN, GH_USER)
@@ -171,6 +174,7 @@ def main():
             GOGS_USER_ID,
             GH_USER,
             GH_ACCESS_TOKEN,
+            MAKE_PRIVATE,
             repo,
         )
         print("     Successfully created new mirror for {:s}".format(repo.name))
