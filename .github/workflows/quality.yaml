@@ -17,7 +17,7 @@ jobs:
       - name: Install Nix formatter
         run: 'nix-env -f https://github.com/NixOS/nixfmt/archive/master.tar.gz -i'
         shell: bash
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
       - uses: CfirTsabari/actions-pipx@v1
       - name: Install mdformat
         run: pipx install mdformat==0.7.18
