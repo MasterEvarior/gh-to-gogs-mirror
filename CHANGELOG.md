@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.1.0...1.2.0) (2025-12-12)
+
+
+### Features
+
+* add new MAKE_PRIVATE parameter ([ce9783a](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/ce9783a8522aed8a082567553e8dd48f02f475a4))
+* improve logging ([580f8fa](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/580f8fa270210519030eae681c76edb842e02d07))
+
+
+### Bug Fixes
+
+* make mirroring work again ([48d1127](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/48d112773a5cfdea35b1de493df0ceb4856a1bcc))
+
 ## [1.1.0](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.0.3...1.1.0) (2025-12-12)
 
 
