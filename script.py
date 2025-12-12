@@ -154,12 +154,12 @@ def main():
             "{:d}/{:d} Checking {:s}...".format(progress, len(repositories), repo.name)
         )
 
-        if repo.name not in gogs_repositories:
+        if repo.name in gogs_repositories:
             print("     {:s} does already exist".format(repo.name))
             progress = progress + 1
             continue
 
-        if repo.get_stats_contributors() != None:
+        if repo.get_stats_contributors() == None:
             print("     {:s} is empty".format(repo.name))
             progress = progress + 1
             continue
@@ -177,7 +177,7 @@ def main():
         progress = progress + 1
         new_mirrors = new_mirrors + 1
 
-    print("Added {:d} new mirrors to your Gogs instance".format(new_mirrors))
+    print("Added {:d} new mirrors to Gogs instance".format(new_mirrors))
 
 
 if __name__ == "__main__":
