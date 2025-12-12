@@ -29,6 +29,7 @@
 
         shellHook = ''
           git config --local core.hooksPath .githooks/
+          git config --local pull.rebase true
         '';
 
         # Environment Variables
