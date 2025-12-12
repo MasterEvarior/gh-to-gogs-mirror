@@ -114,7 +114,7 @@ def main():
     GOGS_USER_ID = int(get_env_var("GOGS_USER_ID"))
     MIRROR_FORKS = get_bool("MIRROR_FORKS", False)
     MAKE_PRIVATE = get_bool("MAKE_PRIVATE", True)
-    VERSION = "1.1.0"  # x-release-please-version
+    VERSION = "1.2.0"  # x-release-please-version
 
     print("Version: {:s}".format(VERSION))
     print("Starting with the following configuration:")
