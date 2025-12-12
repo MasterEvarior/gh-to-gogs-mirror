@@ -104,7 +104,7 @@ def main():
     GOGS_URL = get_env_var("GOGS_URL")
     GOGS_ACCESS_TOKEN = get_env_var("GOGS_TOKEN")
     GOGS_USER_ID = int(get_env_var("GOGS_USER_ID"))
-    VERSION = "1.0.3"  # x-release-please-version
+    VERSION = "1.1.0"  # x-release-please-version
 
     print("Running gh-to-gogs-mirror with version {:s}".format(VERSION))
     print("Fetching GitHub repositories...")
