@@ -97,6 +97,14 @@ def remove_forks(repositories: List[Repository]) -> List[Repository]:
     return repositories
 
 
+def obfuscate_access_token(token: str) -> str:
+    return "*****" if len(token) > 0 else "EMPTY!"
+
+
+def bool_to_string(value: bool) -> str:
+    return "ENABLED" if value else "DISABLED"
+
+
 def main():
     GH_USER = get_env_var("GH_USER")
     GH_ACCESS_TOKEN = get_env_var("GH_TOKEN")
@@ -106,20 +114,40 @@ def main():
     GOGS_USER_ID = int(get_env_var("GOGS_USER_ID"))
     VERSION = "1.1.0"  # x-release-please-version
 
-    print("Running gh-to-gogs-mirror with version {:s}".format(VERSION))
+    print("Version: {:s}".format(VERSION))
+    print("Starting with the following configuration:")
+    print("    - Gogs User Id: {:d}".format(GOGS_USER_ID))
+    print("    - Gogs URL: {:s}".format(GOGS_URL))
+    print(
+        "    - Gogs Access Token: {:s}".format(
+            obfuscate_access_token(GOGS_ACCESS_TOKEN)
+        )
+    )
+    print("    - GitHub User: {:s}".format(GH_USER))
+    print(
+        "    - GitHub Access Token: {:s}".format(
+            obfuscate_access_token(GH_ACCESS_TOKEN)
+        )
+    )
+    print("    - Mirror Forks: {:s}".format(bool_to_string(MIRROR_FORKS)))
+
     print("Fetching GitHub repositories...")
     repositories = get_github_repos(GH_ACCESS_TOKEN, GH_USER)
     print("Found {:d} repositories on GitHub".format(len(repositories)))
 
     if MIRROR_FORKS == False:
-        print("Remove forks from repositories")
+        print("    Remove forks from repositories")
         repositories = remove_forks(repositories)
-        print("{:d} repositories left".format(len(repositories)))
+        print("    {:d} repositories left".format(len(repositories)))
 
     print("Fetching Gogs repositories...")
     gogs_repositories = get_gogs_repos(GOGS_ACCESS_TOKEN, GOGS_URL)
-    print("Found {:d} repositories on Gogs".format(len(gogs_repositories)))
+    print("    Found {:d} repositories on Gogs".format(len(gogs_repositories)))
+    print("    Found these repositories on Gogs:")
+    for repo in gogs_repositories:
+        print("         - {:s}".format(repo))
 
+    new_mirrors = 0
     progress = 0
     for repo in repositories:
         print(
@@ -136,7 +164,7 @@ def main():
             progress = progress + 1
             continue
 
-        print("Create new mirror for {:s}".format(repo.name))
+        print("     Create new mirror for {:s}".format(repo.name))
         create_gogs_repo(
             GOGS_ACCESS_TOKEN,
             GOGS_URL,
@@ -145,8 +173,11 @@ def main():
             GH_ACCESS_TOKEN,
             repo,
         )
-        print("Successfully created new mirror for {:s}".format(repo.name))
+        print("     Successfully created new mirror for {:s}".format(repo.name))
         progress = progress + 1
+        new_mirrors = new_mirrors + 1
+
+    print("Added {:d} new mirrors to your Gogs instance".format(new_mirrors))
 
 
 if __name__ == "__main__":
