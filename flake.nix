@@ -10,22 +10,42 @@
     let
       x86 = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages."${x86}";
+      lib = nixpkgs.lib;
+      lintPkgs = with pkgs; [
+        black
+        beautysh
+        mdformat
+        deadnix
+        nixfmt-rfc-style
+      ];
     in
     {
+      checks."${x86}" = {
+        lint = pkgs.stdenv.mkDerivation {
+          name = "lint";
+          src = ./.;
+
+          dontBuild = true;
+          doCheck = true;
+
+          buildInputs = lintPkgs;
+
+          checkPhase = ''
+            ${lib.getExe pkgs.treefmt} --ci
+          '';
+
+          installPhase = ''
+            mkdir "$out"
+          '';
+        };
+      };
+
       devShells."${x86}".default = pkgs.mkShellNoCC {
-        packages = with pkgs; [
-          # Python
+        packages = [
           (pkgs.python3.withPackages (python-pkgs: [
             python-pkgs.pygithub
           ]))
-
-          # Formatters
-          black
-          beautysh
-          mdformat
-          deadnix
-          nixfmt-rfc-style
-        ];
+        ] ++ lintPkgs;
 
         shellHook = ''
           git config --local core.hooksPath .githooks/
