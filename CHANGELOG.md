@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.1](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.0...1.2.1) (2025-12-25)
+
+
+### Miscellaneous Chores
+
+* **deps:** update docker/login-action digest to 6862ffc ([2ac0f5c](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/2ac0f5c4958868e6e1cc4889653d7936f69e1a2b))
+
+
+### Docs
+
+* fix typos ([9e46197](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/9e461971f1769c37892c07b84d0e863fc15e042f))
+
 ## [1.2.0](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.1.0...1.2.0) (2025-12-12)
 
 
