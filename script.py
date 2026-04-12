@@ -106,6 +106,14 @@ def bool_to_string(value: bool) -> str:
     return "ENABLED" if value else "DISABLED"
 
 
+def is_repository_empty(repository: Repository) -> bool:
+    try:
+        # See: https://stackoverflow.com/a/40743737
+        repository.get_contents("/")
+    except GithubException as e:
+        return False
+
+
 def main():
     GH_USER = get_env_var("GH_USER")
     GH_ACCESS_TOKEN = get_env_var("GH_TOKEN")
@@ -162,7 +170,7 @@ def main():
             progress = progress + 1
             continue
 
-        if repo.get_stats_contributors() == None:
+        if is_repository_empty(repo):
             print("     {:s} is empty".format(repo.name))
             progress = progress + 1
             continue
