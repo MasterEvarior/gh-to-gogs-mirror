@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.1...1.2.2) (2026-04-12)
+
+
+### Bug Fixes
+
+* change method to detect if a repository is empty ([4b99109](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/4b99109ec0b8e601b275fe17d4dfe82aba64ec35))
+
 ## [1.2.1](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.0...1.2.1) (2026-04-12)
 
 
