@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.3](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.2...1.2.3) (2026-05-02)
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency pygithub to v2.9.1 ([1201562](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/1201562b726c69544dd06ebfdcdf51e573721edb))
+* **deps:** update googleapis/release-please-action action to v5 ([7ab9e53](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/7ab9e532a8f8dd9bc4cd18f820f69f416220815f))
+
 ## [1.2.2](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.1...1.2.2) (2026-04-12)
 
 
