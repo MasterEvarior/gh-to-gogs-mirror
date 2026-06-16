@@ -35,15 +35,15 @@ docker run -d \
 
 ### Environment Variables
 
-| Name         | Description                                          | Default | Example                     | Mandatory  |
+| Name | Description | Default | Example | Mandatory |
 |--------------|------------------------------------------------------|---------|-----------------------------|------------|
-| GH_TOKEN     | API Token for GitHub                                 |         | `ghp_o123asd31a`            | ✅         |
-| GH_USER      | Your GitHub username                                 |         | JohnGit                     | ✅         |
-| GOGS_TOKEN   | API Token for Gogs                                   |         | `ah19np12123`               | ✅         |
-| GOGS_URL     | URL to your Gogs instance                            |         | `https://git.my-url/api/v1` | ✅         |
-| GOGS_USER_ID | Id of our Gogs user                                  |         | 78                          | ✅         |
-| MIRROR_FORKS | Whether or not you want to mirror forks you have made | False   | False                       | ❌         |
-| MAKE_PRIVATE | Whether or not you want to make the mirrors private   | True    | True                        | ❌         |
+| GH_TOKEN | API Token for GitHub | | `ghp_o123asd31a` | ✅ |
+| GH_USER | Your GitHub username | | JohnGit | ✅ |
+| GOGS_TOKEN | API Token for Gogs | | `ah19np12123` | ✅ |
+| GOGS_URL | URL to your Gogs instance | | `https://git.my-url/api/v1` | ✅ |
+| GOGS_USER_ID | Id of our Gogs user | | 78 | ✅ |
+| MIRROR_FORKS | Whether or not you want to mirror forks you have made | False | False | ❌ |
+| MAKE_PRIVATE | Whether or not you want to make the mirrors private | True | True | ❌ |
 
 ## Development
 
