@@ -2,7 +2,7 @@
   description = "Development flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs =
@@ -45,7 +45,8 @@
           (pkgs.python3.withPackages (python-pkgs: [
             python-pkgs.pygithub
           ]))
-        ] ++ lintPkgs;
+        ]
+        ++ lintPkgs;
 
         shellHook = ''
           git config --local core.hooksPath .githooks/
