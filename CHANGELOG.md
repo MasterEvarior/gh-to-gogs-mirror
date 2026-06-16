@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.4](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.3...1.2.4) (2026-06-16)
+
+
+### Bug Fixes
+
+* off-by-one error ([b8066da](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/b8066da4308d5fd7f76d8451b2a23ef837b43f3c))
+
+
+### Miscellaneous Chores
+
+* run formatter ([73c90f6](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/73c90f68cd0f156a49d3cabe589e47ccf3d11bb9))
+* switch to nixfmt ([f13fede](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/f13fede1829d9eeea5241244ccb2bd7b218cd5c7))
+* switch to nixos-unstable ([723f611](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/723f611404178dc9ceab907907f80c4dc319062e))
+
 ## [1.2.3](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.2...1.2.3) (2026-05-02)
 
 
