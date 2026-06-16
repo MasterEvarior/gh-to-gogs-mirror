@@ -16,7 +16,7 @@
         beautysh
         mdformat
         deadnix
-        nixfmt-rfc-style
+        nixfmt
       ];
     in
     {
