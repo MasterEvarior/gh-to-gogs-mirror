@@ -159,7 +159,7 @@ def main():
         print("         - {:s}".format(repo))
 
     new_mirrors = 0
-    progress = 0
+    progress = 1
     for repo in repositories:
         print(
             "{:d}/{:d} Checking {:s}...".format(progress, len(repositories), repo.name)
