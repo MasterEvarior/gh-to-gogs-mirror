@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.5](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.4...1.2.5) (2026-09-26)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/checkout action to v7 ([f1cfeaa](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/f1cfeaa3b8a9c90d2e20ee760e980a80271f4c88))
+* **deps:** update dependency pygithub to v2.10.0 ([67f1772](https://github.com/MasterEvarior/gh-to-gogs-mirror/commit/67f177232644e45a2594fc9d5811bb09d48993ea))
+
 ## [1.2.4](https://github.com/MasterEvarior/gh-to-gogs-mirror/compare/1.2.3...1.2.4) (2026-06-16)
 
 
